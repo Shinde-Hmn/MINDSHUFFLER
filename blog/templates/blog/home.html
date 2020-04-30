@@ -1,0 +1,671 @@
+<html>
+<head>
+	<title>Mind Shuffler</title>
+	<meta charset="utf-8">
+  	<meta name="viewport" content="width=device-width, initial-scale=1">
+  	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+  	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  	<link href = "https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel = "stylesheet">
+    <script src = "https://code.jquery.com/jquery-1.10.2.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+
+    <style>
+		table, th, td {
+  			border: 1px solid black;
+  			padding: 5px;
+		}
+</style>
+    <script >
+    	var total=0;
+    	var bit=[0,0,0,0,0,0,0,0];
+    	var distance=0;
+
+    	//full screen
+    	addEventListener("click",function(){
+          var el=document.documentElement,
+          rfs=el.requestFullscreen
+          || el.webkitRequestFullScreen
+          || el.mozRequestFullScreen
+          || el.msRequestFullscreen;
+          rfs.call(el);
+       });
+
+    	//disable refresh
+    	$(function () {
+        $(document).keydown(function (e) {
+            return (e.which || e.keyCode) != 116;
+        	});
+    	});
+
+    	//update score
+    	function updatescore(){
+    		document.getElementById("score").innerHTML ="<b><font color='red' font-size='40px'>Your Score:"+total+"</font></b>";
+    	}
+
+    	//next page
+    	function next(){
+    		window.location.href="final.php?pt="+total;
+    	}
+
+    	//function for timer
+    	var countDownDate = new Date().getTime()+60*60*334;
+		var x = setInterval(function() {
+  			var now = new Date().getTime();
+  			distance = countDownDate - now;
+  			var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  				var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+  			if(seconds<10)
+  			{
+  				document.getElementById("timer").innerHTML =minutes + ":0" + seconds;
+  			}
+  			else{
+  				document.getElementById("timer").innerHTML =minutes + ":" + seconds;
+  			}
+  			if (distance < 0) {
+    			clearInterval(x);
+    			window.location.href="final.php?pt="+total+"&time=0";
+  			}
+		}, 1000);
+
+		//shuffler 1
+		var productOrder1="";
+         $(function() {
+            $('#sortable-1').sortable({
+               update: function(event, ui) {
+                 	productOrder1 = $(this).sortable('toArray').toString();
+               }
+            });
+         });
+		function pri1()
+		{
+			if(productOrder1=='axPSy,aXpsY,aXpSY,axpsY,aXpSy,aXpsy,axPsy,axpSy,axPsY,axPSY,axpSY' &&bit[0]==0){
+				total=total+20;
+				document.getElementById("demo1").innerHTML ="<b><font color='green' font-size='40px'>Correct!!!</font></b>";
+				document.getElementById("score").innerHTML ="<b><font color='red' font-size='40px'>Your Score:"+total+"</font></b>";
+				bit[0]=1;
+			}
+			else if(bit[0]==1)
+			{
+				document.getElementById("demo1").innerHTML ="<b><font color='green' font-size='40px'>Already Done !!!</font></b>";
+			}
+			else
+			{
+				document.getElementById("demo1").innerHTML ="<b><font color='red' font-size='40px'>Wrong!!! Please try again</font></b>";
+			}
+		}
+
+		//shuffler2
+		var productOrder2="";
+         $(function() {
+            $('#sortable-2').sortable({
+               update: function(event, ui) {
+                 	productOrder2 = $(this).sortable('toArray').toString();
+               }
+            });
+         });
+		function pri2()
+		{
+			if(productOrder2=='axPsY,aXpsY,axpsY,axPSY,axpSy,axPsy,axpSY,axPSy,aXpsy' && bit[1]==0){
+				total=total+20;
+				document.getElementById("demo2").innerHTML ="<b><font color='green' font-size='40px'>Correct!!!</font></b>";
+				document.getElementById("score").innerHTML ="<b><font color='red' font-size='40px'>Your Score:"+total+"</font></b>";
+				bit[1]=1;
+			}
+			else if(bit[1]==1)
+			{
+				document.getElementById("demo2").innerHTML ="<b><font color='green' font-size='40px'>Already Done !!!</font></b>";
+			}
+			else
+			{
+				document.getElementById("demo2").innerHTML ="<b><font color='red' font-size='40px'>Wrong!!! Please try again</font></b>";
+			}
+		}
+		//shuffler 3
+		var productOrder3="";
+         $(function() {
+            $('#sortable-3').sortable({
+               update: function(event, ui) {
+                 	productOrder3 = $(this).sortable('toArray').toString();
+               }
+            });
+         });
+		function pri3()
+		{
+			if(productOrder3=='axPSy,axPsy,aXpSy,aXpsy,axpsY,axPSY,aXpsY,axpSy,axpSY,axPsY' && bit[2]==0){
+				total=total+30;
+				document.getElementById("demo3").innerHTML ="<b><font color='green' font-size='40px'>Correct!!!</font></b>";
+				document.getElementById("score").innerHTML ="<b><font color='red' font-size='40px'>Your Score:"+total+"</font></b>";
+				bit[2]=1;
+			}
+			else if(bit[2]==1)
+			{
+				document.getElementById("demo3").innerHTML ="<b><font color='green' font-size='40px'>Already Done !!!</font></b>";
+			}
+			else
+			{
+				document.getElementById("demo3").innerHTML ="<b><font color='red' font-size='40px'>Wrong!!! Please try again</font></b>";
+			}
+			//document.getElementById("demo3").innerHTML =productOrder3;
+		}
+		//shuffler 4
+		var productOrder4="";
+         $(function() {
+            $('#sortable-4').sortable({
+               update: function(event, ui) {
+                 	productOrder4 = $(this).sortable('toArray').toString();
+               }
+            });
+         });
+		function pri4()
+		{
+			if(productOrder4=='axPSy,aXpsy,aXpSY,axPSY,axpsY,aXpSy,aXpsY,axpSy,axPsY,axpSY,axPsy' && bit[3]==0){
+				total=total+30;
+				document.getElementById("demo4").innerHTML ="<b><font color='green' font-size='40px'>Correct!!!</font></b>";
+				document.getElementById("score").innerHTML ="<b><font color='red' font-size='40px'>Your Score:"+total+"</font></b>";
+				bit[3]=1;
+			}
+			else if(bit[3]==1)
+			{
+				document.getElementById("demo4").innerHTML ="<b><font color='green' font-size='40px'>Already Done !!!</font></b>";
+			}
+			else
+			{
+				document.getElementById("demo4").innerHTML ="<b><font color='red' font-size='40px'>Wrong!!! Please try again</font></b>";
+			}
+		}
+
+		//shuffler 5
+		var productOrder5="";
+		$(function() {
+            $('#sortable-5').sortable({
+               update: function(event, ui) {
+                 	productOrder5 = $(this).sortable('toArray').toString();
+               }
+            });
+         });
+		function pri5()
+		{
+			if(productOrder5=='axPSy,aXpSy,aXpsy,axpsY,aXPsY,aXpsY,axpSy,aXPsy,aXpSY,axPsY,axpSY,axPsy,axPSY' &&bit[4]==0){
+				total=total+30;
+				document.getElementById("demo5").innerHTML ="<b><font color='green' font-size='40px'>Correct!!!</font></b>";
+				document.getElementById("score").innerHTML ="<b><font color='red' font-size='40px'>Your Score:"+total+"</font></b>";
+				bit[4]=1;
+			}
+			else if(bit[4]==1)
+			{
+				document.getElementById("demo5").innerHTML ="<b><font color='green' font-size='40px'>Already Done !!!</font></b>";
+			}
+			else
+			{
+				document.getElementById("demo5").innerHTML ="<b><font color='red' font-size='40px'>Wrong!!! Please try again</font></b>";
+			}
+		}
+
+		var productOrder6="";
+		$(function() {
+            $('#sortable-6').sortable({
+               update: function(event, ui) {
+                 	productOrder6 = $(this).sortable('toArray').toString();
+               }
+            });
+         });
+		function pri6()
+		{
+			if(productOrder6=='aXpsY,aXPSy,axPSy,axpsY,aXpSY,axpSy,aXpSy,aXPsY,axpSY,aXPsy,axPsy,axPsY,axPSY,aXpsy' &&bit[5]==0){
+				total=total+30;
+				document.getElementById("demo6").innerHTML ="<b><font color='green' font-size='40px'>Correct!!!</font></b>";
+				document.getElementById("score").innerHTML ="<b><font color='red' font-size='40px'>Your Score:"+total+"</font></b>";
+				bit[5]=1;
+			}
+			else if(bit[5]==1)
+			{
+				document.getElementById("demo6").innerHTML ="<b><font color='green' font-size='40px'>Already Done !!!</font></b>";
+			}
+			else
+			{
+				document.getElementById("demo6").innerHTML ="<b><font color='red' font-size='40px'>Wrong!!! Please try again</font></b>";
+			}
+		}
+		//shuffler 7
+		var productOrder7="";
+         $(function() {
+            $('#sortable-7').sortable({
+               update: function(event, ui) {
+                 	productOrder7 = $(this).sortable('toArray').toString();
+               }
+            });
+         });
+		function pri7()
+		{
+			if((productOrder7=='aXpSy,AxpSY,aXpSY,axpsY,aXPSY,axpSy,AxPsy,aXPsy,axpSY,AxpSy,axPsy,Axpsy,axPsY,AxpsY,axPSy,axPSY,aXpsY,aXpsy,aXPsY,aXPSy'||productOrder7=='aXpSy,AxpSY,aXpSY,axpsY,aXPSY,axpSy,AxPsy,aXPsy,axpSY,AxpSy,axPsy,Axpsy,aXpsy,AxpsY,axPSy,axPSY,aXpsY,axPsY,aXPsY,aXPSy') && bit[6]==0){
+				total=total+50;
+				document.getElementById("demo7").innerHTML ="<b><font color='green' font-size='40px'>Correct!!!</font></b>";
+				document.getElementById("score").innerHTML ="<b><font color='red' font-size='40px'>Your Score:"+total+"</font></b>";
+				bit[6]=1;
+			}
+			else if(bit[6]==1)
+			{
+				document.getElementById("demo7").innerHTML ="<b><font color='green' font-size='40px'>Already Done !!!</font></b>";
+			}
+			else
+			{
+				document.getElementById("demo7").innerHTML ="<b><font color='red' font-size='40px'>Wrong!!! Please try again</font></b>";
+			}
+		}
+
+		//shuffler 8
+		var productOrder8="";
+         $(function() {
+            $('#sortable-8').sortable({
+               update: function(event, ui) {
+                 	productOrder8 = $(this).sortable('toArray').toString();
+               }
+            });
+         });
+		function pri8()
+		{
+			if(productOrder8=='aXpSy,Axpsy,axPSY,aXPsy,aXPSy,axpSy,axPsy,aXPSY,axPsY,axpSY,aXpSY,axPSy,aXPsY,aXpsY,aXpsy' && bit[7]==0){
+				total=total+50;
+				document.getElementById("demo8").innerHTML ="<b><font color='green' font-size='40px'>Correct!!!</font></b>";
+				document.getElementById("score").innerHTML ="<b><font color='red' font-size='40px'>Your Score:"+total+"</font></b>";
+				bit[7]=1;
+			}
+			else if(bit[7]==1)
+			{
+				document.getElementById("demo8").innerHTML ="<b><font color='green' font-size='40px'>Already Done !!!</font></b>";
+			}
+			else
+			{
+				document.getElementById("demo8").innerHTML ="<b><font color='red' font-size='40px'>Wrong!!! Please try again</font></b>";
+			}
+		}
+      </script>
+</head>
+<body style="background: #f3ffff" onload="updatescore()">
+<div class="content-section">
+      <div class="media">
+        <div class="media-body">
+          <p class="account-heading">USER NAME = {{ user.username }}</p>
+          <p class="text-secondary">USER EMAIL = {{ user.email }}</p>
+        </div>
+      </div>
+	<nav class="navbar navbar-expand-sm bg-secondary navbar-dark">
+		<div align="right">
+			<button type="button" onclick="next()" class="btn btn-danger">submit</button>
+		</div>
+		<div class="well well-sm" style="height: 40px;margin-left: 630px;margin-top: 10px;margin-bottom: 10px;"><b><font id="timer" style="font-size: 20px;margin-left: 5px;margin-right: 5px;"></font></b></div>
+	</nav>
+	<div style="text-align: right;margin-right: 210px"><h4 id="score">\<h4></div>
+	<div class="container mt-3">
+  		<br>
+	  	<ul class="nav nav-tabs">
+	    <li class="nav-item">
+	    	<a class="nav-link active" data-toggle="tab" href="#q1">Q 1.</a>
+    	</li>
+    	<li class="nav-item">
+    	  	<a class="nav-link" data-toggle="tab" href="#q2">Q 2.</a>
+    	</li>
+    	<li class="nav-item">
+    	  	<a class="nav-link" data-toggle="tab" href="#q3">Q 3.</a>
+    	</li>
+    	<li class="nav-item">
+    	  	<a class="nav-link" data-toggle="tab" href="#q4">Q 4.</a>
+    	</li>
+    	<li class="nav-item">
+    	  	<a class="nav-link" data-toggle="tab" href="#q5">Q 5.</a>
+    	</li>
+    	<li class="nav-item">
+    	  	<a class="nav-link" data-toggle="tab" href="#q6">Q 6.</a>
+    	</li>
+    	<li class="nav-item">
+    	  	<a class="nav-link" data-toggle="tab" href="#q7">Q 7.</a>
+    	</li>
+    	<li class="nav-item">
+    	  	<a class="nav-link" data-toggle="tab" href="#q8">Q 8.</a>
+    	</li>
+  		</ul>
+		<!-- Tab panes -->
+  		<div class="tab-content">
+    		<div id="q1" class="container tab-pane active"><br>
+
+    			<!--break1-->
+    			<h5><b><font color='red'>Max score:20</font></b></h5>
+    	 		<h3><b>Extremities!!</b></h3>
+    	  		<p style="font-size: 16px;">Rahul is a guy who is very happy for playing with numbers but he is tired now so he wants you to do that work. It is very simple!! here two numbers is given as input than you just have to print <b>Min</b> and <b>Max</b> in the given pattern. </p>
+    	  		<br>
+    	  		<h3><b>INPUT:</b></h3>
+    	  		<p style="font-size: 16px;">Two numbers are taken as input.</p><br>
+    	  		<h3><b>OUTPUT:</b></h3>
+    	  		<p style="font-size: 16px;">Output is in two lines.<br>In first line print Maximum and print Minimum in second line.</p><br>
+    	  		<table style="width:100%;">
+  				<tr>
+    			<th>Sample Input</th><th>Sample Output</th>
+  				</tr>
+  				<tr>
+    			<td>1 2</td><td>Max: 2<br>Min: 1</td>
+  				</tr>
+				</table>
+				<br>
+				<br>
+    	  		<ul id = "sortable-1" style="
+  background-image: linear-gradient(to bottom,#3399ff , #3399ff  50%, #5050f0);padding: 20px;list-style-type:none;border-radius: 8px;">
+  				<li id = "axpsY" class = "default" style="background: #cce5ff;margin: 3px;height: 40px;font-size: 20px;border-radius: 8px;"><font face="Times new roman" style="margin-left: 10px;">  int a,b;</font></li>
+  				<li id = "axpSy" class = "default" style="background: #cce5ff;margin: 3px;height: 40px;font-size: 20px;border-radius: 8px;"><font face="Times new roman" style="margin-left: 10px;">  cout<< "Min:";</font></li>
+  				<li id = "axpSY" class = "default" style="background: #cce5ff;margin: 3px;height: 40px;font-size: 20px;border-radius: 8px;"><font face="Times new roman" style="margin-left: 10px;"> }</font></li>
+  				<li id = "axPsy" class = "default" style="background: #cce5ff;margin: 3px;height: 40px;font-size: 20px;border-radius: 8px;"><font face="Times new roman" style="margin-left: 10px;">  cout<<(x ^ ((x ^ y) & -(x < y)))<< endl;</font></li>
+  				<li id = "axPsY" class = "default" style="background: #cce5ff;margin: 3px;height: 40px;font-size: 20px;border-radius: 8px;"><font face="Times new roman" style="margin-left: 10px;">  cout<<(y ^ ((x ^ y) & -(x < y)))<< endl;</font></li>
+         		<li id = "axPSy" class = "default" style="background: #cce5ff;margin: 3px;height: 40px;font-size: 20px;border-radius: 8px; "><font face="Times new roman" style="margin-left: 10px;">  #include &#8826 bits/stdc++.h &#8827</font></li>
+         		<li id = "axPSY" class = "default" style="background: #cce5ff;margin: 3px;height: 40px;font-size: 20px;border-radius: 8px;"><font face="Times new roman" style="margin-left: 10px;">  return 0;</font></li>
+         		<li id = "aXpsy" class = "default" style="background: #cce5ff;margin: 3px;height: 40px;font-size: 20px;border-radius: 8px;"><font face="Times new roman" style="margin-left: 10px;">  cout<< "Max:"; </font></li>
+         		<li id = "aXpsY" class = "default" style="background: #cce5ff;margin: 3px;height: 40px;font-size: 20px;border-radius: 8px;"><font face="Times new roman" style="margin-left: 10px;">  using namespace std;</font></li>
+         		<li id = "aXpSy" class = "default" style="background: #cce5ff;margin: 3px;height: 40px;font-size: 20px;border-radius: 8px;"><font face="Times new roman" style="margin-left: 10px;"> cin>>a>>b; </font></li>
+         		<li id = "aXpSY" class = "default" style="background: #cce5ff;margin: 3px;height: 40px;font-size: 20px;border-radius: 8px;"><font face="Times new roman" style="margin-left: 10px;">  int main(){</font></li>
+				</ul>
+				<p id="demo1"></p>
+				<button type='button' class="btn btn-danger" onclick='pri1()'>Submit</button><br><br><br><br>
+   		 	</div>
+
+
+   		 	<!--Shuffler2-->
+   		 	<div id="q2" class="container tab-pane"><br>
+
+    			<!--break2-->
+    			<h5><b><font color='red'>Max score:20</font></b></h5>
+    	 		<h3><b>Flip The Tree</b></h3>
+    	  		<p style="font-size: 16px;">Rohan wants to play with Tree. But there is raining outside so Now he decided to play with the Tree data structure. So Rohan wants to Flip the Tree. But Rohan wants your help to complete the function to flip the tree.<br>So, Your task is to just rearrange the code of the function <b>flipBinaryTree()</b>.<br>In the flip operation, left most node becomes the root of a flipped tree and its parent becomes its right child and the right sibling becomes its left child and the same should be done for all left most nodes recursively.</b></p>
+    	  		<br>
+    	  		<h3><b>INPUT:</b></h3>
+    	  		<p style="font-size: 16px;">Input is already given to the function. No need to do anything for the input. your work is just return of the root of the modified tree.</p><br>
+    	  		<h3><b>OUTPUT:</b></h3>
+    	  		<p style="font-size: 16px;">The output is printed by the main function. No need to print in function.</p><br>
+    	  		<table style="width:100%;">
+  				<tr>
+    			<th>Sample Input</th><th>Sample Output</th>
+  				</tr>
+  				<tr>
+    			<td><br>&nbsp;&nbsp;&nbsp;&nbsp;1<br>&nbsp;&nbsp;&nbsp;&nbsp;/&nbsp;\<br>&nbsp;&nbsp;2&nbsp;&nbsp;&nbsp;3<br>&nbsp;/&nbsp;\&nbsp;&nbsp;&nbsp;/&nbsp;\<br>4&nbsp;5&nbsp;&nbsp;6&nbsp;7<br></td>
+    			<td>&nbsp;&nbsp;&nbsp;&nbsp;4<br>&nbsp;&nbsp;&nbsp;&nbsp;/&nbsp;\<br>&nbsp;&nbsp;5&nbsp;&nbsp;&nbsp;2<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;\<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3&nbsp;&nbsp;1<br>&nbsp;&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;\<br>&nbsp;&nbsp;&nbsp;6&nbsp;&nbsp;7</td>
+  				</tr>
+				</table>
+				<br>
+				<br>
+    	  		<ul id = "sortable-2" style="
+  background-image: linear-gradient(to bottom,#3399ff , #3399ff  50%, #5050f0);padding: 20px;list-style-type:none;border-radius: 8px;">
+  				<li id = "axpsY" class = "default" style="background: #cce5ff;margin: 3px;height: 60px;font-size: 20px;border-radius: 8px;"><font face="Times new roman" style="margin-left: 10px;"> if (root->left == NULL && root->right == NULL) <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return root; </font></li>
+  				<li id = "axpSy" class = "default" style="background: #cce5ff;margin: 3px;height: 40px;font-size: 20px;border-radius: 8px;"><font face="Times new roman" style="margin-left: 10px;">  root->left->left = root->right;</font></li>
+  				<li id = "axpSY" class = "default" style="background: #cce5ff;margin: 3px;height: 40px;font-size: 20px;border-radius: 8px;"><font face="Times new roman" style="margin-left: 10px;">  root->left = root->right = NULL;</font></li>
+  				<li id = "axPsy" class = "default" style="background: #cce5ff;margin: 3px;height: 40px;font-size: 20px;border-radius: 8px; "><font face="Times new roman" style="margin-left: 10px;">  root->left->right = root;</font></li>
+  				<li id = "axPsY" class = "default" style="background: #cce5ff;margin: 3px;height: 40px;font-size: 20px;border-radius: 8px;"><font face="Times new roman" style="margin-left: 10px;"> Node* flipBinaryTree(Node* root) {</font></li>
+  				<li id = "axPSy" class = "default" style="background: #cce5ff;margin: 3px;height: 40px;font-size: 20px;border-radius: 8px;"><font face="Times new roman" style="margin-left: 10px;">  return flippedRoot;  </font></li>
+  				<li id = "axPSY" class = "default" style="background: #cce5ff;margin: 3px;height: 40px;font-size: 20px;border-radius: 8px;"><font face="Times new roman" style="margin-left: 10px;">  Node* flippedRoot = flipBinaryTree(root->left);</font></li>
+  				<li id = "aXpsy" class = "default" style="background: #cce5ff;margin: 3px;height: 40px;font-size: 20px;border-radius: 8px;"><font face="Times new roman" style="margin-left: 10px;"> }</font></li>
+  				<li id = "aXpsY" class = "default" style="background: #cce5ff;margin: 3px;height: 60px;font-size: 20px;border-radius: 8px;"><font face="Times new roman" style="margin-left: 10px;"> if (root == NULL)<br>&nbsp;&nbsp;&nbsp; return root;</font></li>
+				</ul>
+				<p id="demo2"></p>
+				<button type='button' class="btn btn-danger" onclick='pri2()'>Submit</button><br><br><br><br>
+   		 	</div>
+
+
+   		 	<!--Shuffler3-->
+   		 	<div id="q3" class="container tab-pane"><br>
+    			<!--break3-->
+    			<h5><b><font color='red'>Max score:30</font></b></h5>
+    	 		<h3><b>Assignement Fear!!</b></h3>
+    	  		<p style="font-size: 16px;">Ayush is a school boy who wants to get good marks in 12th class. For better grades, He studied and very hard but there is a problem. The class teacher gives the assignment which is 20% of total marks. so Now Ayush completely focused on assignment but he is stuck in the code of generating grey codes. So he wants help from you that just complete the function of generating  <b>Grey Codes  </b>of  <b>N</b> binary digits.</p>
+    	  		<br>
+    	  		<h3><b>INPUT:</b></h3>
+    	  		<p style="font-size: 16px;">Input is already given to the function. No need to do anything for the input. your work is just return of the root of the modified tree.</p><br>
+    	  		<h3><b>OUTPUT:</b></h3>
+    	  		<p style="font-size: 16px;">Print the output in function.</p><br>
+    	  		<table style="width:100%;">
+  				<tr>
+    			<th>Sample Input</th><th>Sample Output</th>
+  				</tr>
+  				<tr>
+    			<td>3</td>
+    			<td>000<br>001<br>011<br>010<br>110<br>111<br>101<br>100</td>
+  				</tr>
+				</table>
+				<br>
+				<br>
+    	  		<ul id = "sortable-3" style="
+  background-image: linear-gradient(to bottom,#3399ff , #3399ff  50%, #5050f0);padding: 20px;list-style-type:none;border-radius: 8px;">
+  				<li id = "axpsY" class = "default" style="background: #cce5ff;margin: 3px;height: 40px;font-size: 20px;border-radius: 8px;"><font face="Times new roman" style="margin-left: 10px;"> for (i = 2; i < (1<< n); i = i<<1 ){</font></li>
+  				<li id = "axpSy" class = "default" style="background: #cce5ff;margin: 3px;height: 85px;font-size: 20px;border-radius: 8px;"><font face="Times new roman" style="margin-left: 10px;"> for (j = i ; j < 2*i ; j++) <br>&nbsp;&nbsp;&nbsp;arr[j] = "1" + arr[j]; <br>&nbsp;&nbsp;}</font></li>
+  				<li id = "axpSY" class = "default" style="background: #cce5ff;margin: 3px;height: 60px;font-size: 20px;border-radius: 8px;"><font face="Times new roman" style="margin-left: 10px;">for (i = 0 ; i < arr.size() ; i++ )<br>&nbsp;&nbsp;&nbsp;cout << arr[i] << endl; </font></li>
+  				<li id = "axPsy" class = "default" style="background: #cce5ff;margin: 3px;height: 60px;font-size: 20px;border-radius: 8px;"><font face="Times new roman" style="margin-left: 10px;"> int i,j;<br>&nbsp;&nbsp;vector< string > arr;</font></li>
+  				<li id = "axPsY" class = "default" style="background: #cce5ff;margin: 3px;height: 40px;font-size: 20px;border-radius: 8px;"><font face="Times new roman" style="margin-left: 10px;">}</font></li>
+  				<li id = "axPSy" class = "default" style="background: #cce5ff;margin: 3px;height: 40px;font-size: 20px;border-radius: 8px;"><font face="Times new roman" style="margin-left: 10px;"> void generateGrayarr(int n) {</font></li>
+  				<li id = "axPSY" class = "default" style="background: #cce5ff;margin: 3px;height: 60px;font-size: 20px;border-radius: 8px;"><font face="Times new roman" style="margin-left: 10px;">  for (j = i-1 ; j >= 0 ; j--) <br>&nbsp;&nbsp;&nbsp;arr.push_back(arr[j]);  </font></li>
+  				<li id = "aXpsy" class = "default" style="background: #cce5ff;margin: 3px;height: 60px;font-size: 20px;border-radius: 8px; "><font face="Times new roman" style="margin-left: 10px;">  if (n <= 0) <br>&nbsp;&nbsp;return;</font></li>
+  				<li id = "aXpsY" class = "default" style="background: #cce5ff;margin: 3px;height: 60px;font-size: 20px;border-radius: 8px;"><font face="Times new roman" style="margin-left: 10px;">  for (j = 0 ; j < i ; j++) <br>&nbsp;&nbsp;&nbsp;arr[j] = "0" + arr[j]; </font></li>
+  				<li id = "aXpSy" class = "default" style="background: #cce5ff;margin: 3px;height: 60px;font-size: 20px;border-radius: 8px;"><font face="Times new roman" style="margin-left: 10px;">   arr.push_back("0"); <br>&nbsp;&nbsp;arr.push_back("1");</font></li>
+				</ul>
+				<p id="demo3"></p>
+				<button type='button' class="btn btn-danger" onclick='pri3()'>Submit</button><br><br><br><br>
+   		 	</div>
+
+   		 	<!--Shuffler4-->
+   		 	<div id="q4" class="container tab-pane"><br>
+
+    			<!--break4-->
+    			<h5><b><font color='red'>Max score:30</font></b></h5>
+    	 		<h3><b>Left-Right to Down-Right</b></h3>
+    	  		<p style="font-size: 17px;"><b>Left-Right representation </b>of a binary tree is standard representation where every node has a pointer to left child and another pointer to right child.<br><b>Down-Right representation </b>is an alternate representation where every node has a pointer to left (or first) child and another pointer to next sibling. So siblings at every level are connected from left to right.<br>Your task is to reaarange the function which is convert the Left-Right representation to Down-Right representation.</p>
+    	  		<br>
+    	  		<h3><b>INPUT:</b></h3>
+    	  		<p style="font-size: 17px;">Input is already given to the function. No need to do anything for the input. your work is just return of the root of the modified tree.</p><br>
+    	  		<h3><b>OUTPUT:</b></h3>
+    	  		<p style="font-size: 17px;">The output is printed by the main function. No need to print in function.</p><br>
+    	  		<table style="width:100%;">
+  				<tr>
+    			<th>Sample Input</th><th>Sample Output</th>
+  				</tr>
+  				<tr>
+    			<td><br>&nbsp;&nbsp;&nbsp;&nbsp;1<br>&nbsp;&nbsp;&nbsp;&nbsp;/&nbsp;\<br>&nbsp;&nbsp;2&nbsp;&nbsp;&nbsp;3<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/&nbsp;\<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4&nbsp;5<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/&nbsp;/&nbsp;\<br>&nbsp;&nbsp;&nbsp;&nbsp;6&nbsp;7&nbsp;8</td>
+    			<td>1<br>&nbsp;|<br>2-3<br>&nbsp;&nbsp;&nbsp;&nbsp;|<br>&nbsp;&nbsp;&nbsp;&nbsp;4-5<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;|<br>&nbsp;&nbsp;&nbsp;&nbsp;6&nbsp;&nbsp;7-8</td>
+  				</tr>
+				</table>
+				<br>
+				<br>
+    	  		<ul id = "sortable-4" style="
+  background-image: linear-gradient(to bottom,#3399ff , #3399ff  50%, #5050f0);padding: 20px;list-style-type:none;border-radius: 8px;">
+  				<li id = "axpsY" class = "default" style="background: #cce5ff;margin: 3px;height: 40px;font-size: 20px;border-radius: 8px;"><font face="Times new roman" style="margin-left: 10px;">if (root->left == NULL) {</font></li>
+  				<li id = "axpSy" class = "default" style="background: #cce5ff;margin: 3px;height: 40px;font-size: 20px;border-radius: 8px;"><font face="Times new roman" style="margin-left: 10px;">root->left->right = root->right;</font></li>
+  				<li id = "axpSY" class = "default" style="background: #cce5ff;margin: 3px;height: 40px;font-size: 20px;border-radius: 8px;"><font face="Times new roman" style="margin-left: 10px;"> root->right = NULL;</font></li>
+  				<li id = "axPsy" class = "default" style="background: #cce5ff;margin: 3px;height: 40px;font-size: 20px;border-radius: 8px;"><font face="Times new roman" style="margin-left: 10px;"> } //End of function</font></li>
+  				<li id = "axPsY" class = "default" style="background: #cce5ff;margin: 3px;height: 40px;font-size: 20px;border-radius: 8px;"><font face="Times new roman" style="margin-left: 10px;"> }  //End of else</font></li>
+  				<li id = "axPSy" class = "default" style="background: #cce5ff;margin: 3px;height: 40px;font-size: 20px;border-radius: 8px;"><font face="Times new roman" style="margin-left: 10px;"> void convert(node *root) { </font></li>
+  				<li id = "axPSY" class = "default" style="background: #cce5ff;margin: 3px;height: 40px;font-size: 20px;border-radius: 8px; "><font face="Times new roman" style="margin-left: 10px;">  convert(root->right);</font></li>
+  				<li id = "aXpsy" class = "default" style="background: #cce5ff;margin: 3px;height: 40px;font-size: 20px;border-radius: 8px;"><font face="Times new roman" style="margin-left: 10px;"> if (root == NULL)  return;</font></li>
+  				<li id = "aXpsY" class = "default" style="background: #cce5ff;margin: 3px;height: 40px;font-size: 20px;border-radius: 8px;"><font face="Times new roman" style="margin-left: 10px;">  } else{</font></li>
+  				<li id = "aXpSy" class = "default" style="background: #cce5ff;margin: 3px;height: 40px;font-size: 20px;border-radius: 8px;"><font face="Times new roman" style="margin-left: 10px;"> root->left = root->right; </font></li>
+  				<li id = "aXpSY" class = "default" style="background: #cce5ff;margin: 3px;height: 40px;font-size: 20px;border-radius: 8px;"><font face="Times new roman" style="margin-left: 10px;"> convert(root->left);</font></li>
+				</ul>
+				<p id="demo4"></p>
+				<button type='button' class="btn btn-danger" onclick='pri4()'>Submit</button><br><br><br><br>
+   		 	</div>
+
+   		 	<!--break5-->
+   		 	<div id="q5" class="container tab-pane"><br>
+   		 		<h5><b><font color='red'>Max score:30</font></b></h5>
+    	 		<h3><b>The Prime Cells</b></h3>
+    	  		<p style="font-size: 16px;">You are given a grid of size <b>n*n</b> filled with numbers in each of its cells. Now you need to count total cells in the grid such that the sum of the numbers on its top , left , right and bottom cells is a prime number. In case there is no cell in a particular direction assume the number to be as 0. </p>
+    	  		<h3><b>Input Format:</b></h3>
+    	  		<p style="font-size: 16px;">First line contains a number n as input denoting size of the grid. Next n lines contain n numbers each denoting value of the elements of the grid in each row.</p>
+    	  		<h3><b>Output Format:</b></h3>
+    	  		<p style="font-size: 16px;">In the output you have to give the count of total cells as described above.</p>
+    	  		<h3><b>Constraints:</b></h3>
+    	  		<p style="font-size: 16px;">1 < n <101<br>
+    	  			0< g[i][j] <101 where g[i][j] is the value in the grid at i<sup>th</sup> row and j<sup>th</sup> column.</p><br>
+    	  		<table style="width:100%;">
+  				<tr>
+    			<th>Sample Input</th><th>Sample Output</th>
+  				</tr>
+  				<tr>
+    			<td>2<br>1 2<br>3 4</td><td>4</td>
+  				</tr>
+				</table>
+				<br>
+    	  		<ul id = "sortable-5" style="
+  background-image: linear-gradient(to bottom,#3399ff , #3399ff  50%, #5050f0);padding: 20px;list-style-type:none;border-radius: 8px;">
+  				<li id = "axpsY" class = "default" style="background: #cce5ff;margin: 3px;height: 30px;font-size: 16px;border-radius: 8px;"><font face="Times new roman" style="margin-left: 10px;">  int main(){</font></li>
+  				<li id = "axpSy" class = "default" style="background: #cce5ff;margin: 3px;height: 100px;font-size: 16px;border-radius: 8px;"><font face="Times new roman" style="margin-left: 10px;">for(i = 0;i < n;i++){<br>&nbsp;&nbsp;&nbsp;for(j = 0;j < n;j++)<br>&nbsp;&nbsp;&nbsp;&nbsp;cin>>matrix[i][j];<br>&nbsp;}</font></li>
+  				<li id = "axpSY" class = "default" style="background: #cce5ff;margin: 3px;height: 70px;font-size: 16px;border-radius: 8px;"><font face="Times new roman" style="margin-left: 10px;">if(isprime(sum))<br>&nbsp;&nbsp;count++;}<br>}</font></li>
+         		<li id = "axPsy" class = "default" style="background: #cce5ff;margin: 3px;height: 30px;font-size: 16px;border-radius: 8px;"><font face="Times new roman" style="margin-left: 10px;">cout<< count;</font></li>
+         		<li id = "axPsY" class = "default" style="background: #cce5ff;margin: 3px;height: 180px;font-size: 16px;border-radius: 8px;"><font face="Times new roman" style="margin-left: 10px;"> if(i-1>=0)<br>&nbsp;&nbsp;&nbsp;sum+=a[i-1][j];<br>&nbsp;if(i+1< n)<br>&nbsp;&nbsp;&nbsp;sum+=a[i+1][j];<br>&nbsp;if(j-1>=0)<br>&nbsp;&nbsp;&nbsp;sum+=a[i][j-1];<br>&nbsp;if(j+1< n)<br>&nbsp;&nbsp;&nbsp;sum+=a[i][j+1];</font></li>
+  				<li id = "axPSy" class = "default" style="background: #cce5ff;margin: 3px;height: 30px;font-size: 16px;border-radius: 8px;"><font face="Times new roman" style="margin-left: 10px;">  #include &#8826 bits/stdc++.h &#8827</font></li>
+  				<li id = "axPSY" class = "default" style="background: #cce5ff;margin: 3px;height: 45px;font-size: 16px;border-radius: 8px;"><font face="Times new roman" style="margin-left: 10px;">return 0;<br>&nbsp;}</font></li>
+  				<li id = "aXpsy" class = "default" style="background: #cce5ff;margin: 3px;height: 230px;font-size: 16px;border-radius: 8px;"><font face="Times new roman" style="margin-left: 10px;"> int isprime(int n){<br>&nbsp;&nbsp;&nbsp; if(n==2||n==3)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return 1;<br>&nbsp;&nbsp;&nbsp;if(n%2==0||n%3==0)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return 0;<br>&nbsp;&nbsp;&nbsp;for(int i=5;i*i<=n;i=i+6){<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(n%i==0||n%(i+2)==0)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return 0;}<br>&nbsp;&nbsp;&nbsp;return 1;<br>&nbsp;}</font></li>
+  				<li id = "aXpsY" class = "default" style="background: #cce5ff;margin: 3px;height: 30px;font-size: 16px;border-radius: 8px;"><font face="Times new roman" style="margin-left: 10px;">cin>>n;</font></li>
+         		<li id = "aXpSy" class = "default" style="background: #cce5ff;margin: 3px;height: 30px;font-size: 16px;border-radius: 8px;"><font face="Times new roman" style="margin-left: 10px;">  using namespace std;</font></li>
+         		<li id = "aXpSY" class = "default" style="background: #cce5ff;margin: 3px;height: 30px;font-size: 16px;border-radius: 8px;"><font face="Times new roman" style="margin-left: 10px;">sum=0;</font></li>
+         		<li id = "aXPsy" class = "default" style="background: #cce5ff;margin: 3px;height: 45px;font-size: 16px;border-radius: 8px;"><font face="Times new roman" style="margin-left: 10px;">for(i = 0;i < n;i++){<br>&nbsp;&nbsp;&nbsp;for(j = 0;j < n;j++){</font></li>
+         		<li id = "aXPsY" class = "default" style="background: #cce5ff;margin: 3px;height: 30px;font-size: 16px;border-radius: 8px;"><font face="Times new roman" style="margin-left: 10px;">  int n,i,j,count=0,sum,matrix[101][101];</font></li>
+				</ul>
+				<p id="demo5"></p>
+				<button type='button' class="btn btn-danger" onclick='pri5()'>Submit</button><br><br><br><br>
+   		 	</div>
+
+   		 	<!--break6-->
+   		 	<div id="q6" class="container tab-pane"><br>
+   		 		<h5><b><font color='red'>Max score:30</font></b></h5>
+    	 		<h3><b>Longest Sequence of 1's</b></h3>
+    	  		<p style="font-size: 16px;">Give an integer n. We can flip exactly one bit. Write code to find the length of the longest sequence of 1 s you could create. </p>
+    	  		<h3><b>Input Format:</b></h3>
+    	  		<p style="font-size: 16px;">Input integer <b>N</b> is given.</p>
+    	  		<h3><b>Output Format:</b></h3>
+    	  		<p style="font-size: 16px;">Print the the output as required.</p>
+    	  		<table style="width:100%;">
+  				<tr>
+    			<th>Sample Input</th><th>Sample Output</th>
+  				</tr>
+  				<tr>
+    			<td>12</td><td>3</td>
+  				</tr>
+				</table>
+				<br>
+    	  		<ul id = "sortable-6" style="
+  background-image: linear-gradient(to bottom,#3399ff , #3399ff  50%, #5050f0);padding: 20px;list-style-type:none;border-radius: 8px;">
+  				<li id = "axpsY" class = "default" style="background: #cce5ff;margin: 3px;height: 40px;font-size: 20px;border-radius: 8px;"><font face="Times new roman" style="margin-left: 10px;">while (a!= 0) { </font></li>
+  				<li id = "axpSy" class = "default" style="background: #cce5ff;margin: 3px;height: 40px;font-size: 20px;border-radius: 8px;"><font face="Times new roman" style="margin-left: 10px;"> else if ((a & 1) == 0) { </font></li>
+  				<li id = "axpSY" class = "default" style="background: #cce5ff;margin: 3px;height: 40px;font-size: 20px;border-radius: 8px;"><font face="Times new roman" style="margin-left: 10px;">} //End of else if condition </font></li>
+  				<li id = "axPsy" class = "default" style="background: #cce5ff;margin: 3px;height: 40px;font-size: 20px;border-radius: 8px;"><font face="Times new roman" style="margin-left: 10px;">a >>= 1;</font></li>
+  				<li id = "axPsY" class = "default" style="background: #cce5ff;margin: 3px;height: 40px;font-size: 20px;border-radius: 8px;"><font face="Times new roman" style="margin-left: 10px;">} //End of while loop</font></li>
+  				<li id = "axPSy" class = "default" style="background: #cce5ff;margin: 3px;height: 60px;font-size: 20px;border-radius: 8px;"><font face="Times new roman" style="margin-left: 10px;">if (~a == 0) <br>&nbsp;&nbsp;&nbsp;&nbsp;return 8*sizeof(int); </font></li>
+  				<li id = "axPSY" class = "default" style="background: #cce5ff;margin: 3px;height: 30px;font-size: 20px;border-radius: 8px;"><font face="Times new roman" style="margin-left: 10px;">  return maxLen+1;</font></li>
+  				<li id = "aXpsy" class = "default" style="background: #cce5ff;margin: 3px;height: 30px;font-size: 20px;border-radius: 8px;"><font face="Times new roman" style="margin-left: 10px;">  } //End of function</font></li>
+  				<li id = "aXpsY" class = "default" style="background: #cce5ff;margin: 3px;height: 30px;font-size: 20px;border-radius: 8px;"><font face="Times new roman" style="margin-left: 10px;"> int flipBit(unsigned a) {</font></li>
+  				<li id = "aXpSy" class = "default" style="background: #cce5ff;margin: 3px;height: 40px;font-size: 20px;border-radius: 8px;"><font face="Times new roman" style="margin-left: 10px;">prevLen = (a & 2) == 0? 0 : currLen;</font></li>
+  				<li id = "aXpSY" class = "default" style="background: #cce5ff;margin: 3px;height: 60px;font-size: 20px;border-radius: 8px;"><font face="Times new roman" style="margin-left: 10px;">  if ((a & 1) == 1) <br>&nbsp;&nbsp;&nbsp;&nbsp;currLen++; </font></li>
+  				<li id = "aXPsy" class = "default" style="background: #cce5ff;margin: 3px;height: 30px;font-size: 20px;border-radius: 8px;"><font face="Times new roman" style="margin-left: 10px;">  maxLen = max(prevLen + currLen, maxLen); </font></li>
+  				<li id = "aXPsY" class = "default" style="background: #cce5ff;margin: 3px;height: 40px;font-size: 20px;border-radius: 8px;"><font face="Times new roman" style="margin-left: 10px;"> currLen = 0;</font></li>
+  				<li id = "aXPSy" class = "default" style="background: #cce5ff;margin: 3px;height: 40px;font-size: 20px;border-radius: 8px;"><font face="Times new roman" style="margin-left: 10px;">int currLen = 0, prevLen = 0, maxLen = 0; </font></li>
+				</ul>
+				<p id="demo6"></p>
+				<button type='button' class="btn btn-danger" onclick='pri6()'>Submit</button><br><br><br><br>
+   		 	</div>
+   		 	<!--Shuffler7-->
+   		 	<div id="q7" class="container tab-pane"><br>
+
+    			<!--break7-->
+    			<h5><b><font color='red'>Max score:50</font></b></h5>
+    	 		<h3><b>Cars in the lane</b></h3>
+    	  		<p style="font-size: 16px;">You are given ID of different uni-directional highways in the ByteLand. The highways are quite mysterious. If you convert their IDs to a binary number then it means that the bit position where the value is 0, those lanes are closed or else the lanes are open. Now for each highway, you need to count in how many ways the open lanes of the highway can be occupied.<br><b>Note:</b> If none of the lanes are occupied then also it is counted as a way.</p>
+    	  		<br>
+    	  		<h3><b>INPUT:</b></h3>
+    	  		<p style="font-size: 16px;">First line of the input contains an integer <b>T</b>, the number of test cases.<br>Next <b>T </b>lines contain an integer <b>N.</b></p><br>
+    	  		<h3><b>OUTPUT:</b></h3>
+    	  		<p style="font-size: 16px;">Print T lines, i-th line contains the answer to the i-th test case.</p><br>
+    	  		<h3><b>Constraints:</b></h3>
+    	  		<p style="font-size: 16px;">1 <= T <= 10e5<br>1 <= N <=10e18</p><br>
+    	  		<table style="width:100%;">
+  				<tr>
+    			<th>Sample Input</th><th>Sample Output</th>
+  				</tr>
+  				<tr>
+    			<td>4<br>2<br>1<br>4<br>3</td>
+    			<td>2<br>2<br>2<br>4</td>
+  				</tr>
+				</table>
+				<br>
+				<br>
+    	  		<ul id = "sortable-7" style="
+  background-image: linear-gradient(to bottom,#3399ff , #3399ff  50%, #5050f0);padding: 20px;list-style-type:none;border-radius: 8px;">
+  				<li id = "axpsY" class = "default" style="background: #cce5ff;margin: 3px;height: 40px;font-size: 20px;border-radius: 8px; "><font face="Times new roman" style="margin-left: 10px;">  ios_base::sync_with_stdio(false);</font></li>
+  				<li id = "axpSy" class = "default" style="background: #cce5ff;margin: 3px;height: 40px;font-size: 20px;border-radius: 8px;"><font face="Times new roman" style="margin-left: 10px;">  long long n,t,cnt,ans = 1;</font></li>
+  				<li id = "axpSY" class = "default" style="background: #cce5ff;margin: 3px;height: 60px;font-size: 20px;border-radius: 8px;"><font face="Times new roman" style="margin-left: 10px;"> cin >> n;<br>&nbsp;&nbsp;cnt = 0;</font></li>
+  				<li id = "axPsy" class = "default" style="background: #cce5ff;margin: 3px;height: 60px;font-size: 20px;border-radius: 8px;"><font face="Times new roman" style="margin-left: 10px;">if(n & 1)<br>&nbsp;&nbsp;cnt ++;</font></li>
+  				<li id = "axPsY" class = "default" style="background: #cce5ff;margin: 3px;height: 40px;font-size: 20px;border-radius: 8px;"><font face="Times new roman" style="margin-left: 10px;">} //End of while loop</font></li>
+  				<li id = "axPSy" class = "default" style="background: #cce5ff;margin: 3px;height: 40px;font-size: 20px;border-radius: 8px;"><font face="Times new roman" style="margin-left: 10px;">ans <<= 1;</font></li>
+  				<li id = "axPSY" class = "default" style="background: #cce5ff;margin: 3px;height: 40px;font-size: 20px;border-radius: 8px;"><font face="Times new roman" style="margin-left: 10px;">} //End of for loop</font></li>
+  				<li id = "aXpsy" class = "default" style="background: #cce5ff;margin: 3px;height: 40px;font-size: 20px;border-radius: 8px;"><font face="Times new roman" style="margin-left: 10px;">} //End of while loop</font></li>
+  				<li id = "aXpsY" class = "default" style="background: #cce5ff;margin: 3px;height: 40px;font-size: 20px;border-radius: 8px;"><font face="Times new roman" style="margin-left: 10px;">cout << ans << '\n';</font></li>
+  				<li id = "aXpSy" class = "default" style="background: #cce5ff;margin: 3px;height: 40px;font-size: 20px;border-radius: 8px;"><font face="Times new roman" style="margin-left: 10px;">#include &#8826 bits/stdc++.h &#8827</font></li>
+  				<li id = "aXpSY" class = "default" style="background: #cce5ff;margin: 3px;height: 40px;font-size: 20px;border-radius: 8px;"><font face="Times new roman" style="margin-left: 10px;">  int main() {</font></li>
+  				<li id = "aXPsy" class = "default" style="background: #cce5ff;margin: 3px;height: 40px;font-size: 20px;border-radius: 8px;"><font face="Times new roman" style="margin-left: 10px;">while(t --) {</font></li>
+  				<li id = "aXPsY" class = "default" style="background: #cce5ff;margin: 3px;height: 40px;font-size: 20px;border-radius: 8px;"><font face="Times new roman" style="margin-left: 10px;">return 0;</font></li>
+  				<li id = "aXPSy" class = "default" style="background: #cce5ff;margin: 3px;height: 40px;font-size: 20px;border-radius: 8px;"><font face="Times new roman" style="margin-left: 10px;">}     //End of main function</font></li>
+  				<li id = "aXPSY" class = "default" style="background: #cce5ff;margin: 3px;height: 40px;font-size: 20px;border-radius: 8px;"><font face="Times new roman" style="margin-left: 10px;"> cin.tie(NULL);</font></li>
+  				<li id = "Axpsy" class = "default" style="background: #cce5ff;margin: 3px;height: 40px;font-size: 20px;border-radius: 8px;"><font face="Times new roman" style="margin-left: 10px;">n >>= 1;</font></li>
+  				<li id = "AxpsY" class = "default" style="background: #cce5ff;margin: 3px;height: 40px;font-size: 20px;border-radius: 8px;"><font face="Times new roman" style="margin-left: 10px;">for(int i = 1; i <= cnt; i ++){</font></li>
+  				<li id = "AxpSy" class = "default" style="background: #cce5ff;margin: 3px;height: 40px;font-size: 20px;border-radius: 8px;"><font face="Times new roman" style="margin-left: 10px;">while(n) {</font></li>
+  				<li id = "AxpSY" class = "default" style="background: #cce5ff;margin: 3px;height: 40px;font-size: 20px;border-radius: 8px;"><font face="Times new roman" style="margin-left: 10px;">  using namespace std;</font></li>
+  				<li id = "AxPsy" class = "default" style="background: #cce5ff;margin: 3px;height: 40px;font-size: 20px;border-radius: 8px;"><font face="Times new roman" style="margin-left: 10px;"> cin >> t;</font></li>
+				</ul>
+				<p id="demo7"></p>
+				<button type='button' class="btn btn-danger" onclick='pri7()'>Submit</button><br><br><br><br>
+   		 	</div>
+
+
+   		 	<!--break8-->
+   		 	<div id="q8" class="container tab-pane"><br>
+   		 		<h5><b><font color='red'>Max score:50</font></b></h5>
+    	 		<h3><b>Set and Unset bits</b></h3>
+    	  		<p style="font-size: 16px;">Lazy problem setter runs out of stories for this problem and doesn't want to gift arrays on birthdays.<br>Construct a sequence of positive integers for which the greatest common divisor of their count of set and unset bits is 1.<br>S={x : x is a positive integer and gcd of count of its set and unset bits is 1}<br>You will be asked <b>Q</b> queries, each query contains a number <b>K</b> . For each query you need to find the <b>K<sup>th</sup></b> element of this sequence. </p>
+    	  		<h3><b>Input Format:</b></h3>
+    	  		<p style="font-size: 16px;">First line contains Q and subsequent Q lines contain only one integer K.</p>
+    	  		<h3><b>Output Format:</b></h3>
+    	  		<p style="font-size: 16px;">Output Q lines each line containing K<sup>th</sup> element of sequence S.</p>
+    	  		<h3><b>Constraints:</b></h3>
+    	  		<p style="font-size: 16px;">1 <= Q <= 100000<br>
+    	  			1 <= k <=627509</p><br>
+    	  		<table style="width:100%;">
+  				<tr>
+    			<th>Sample Input</th><th>Sample Output</th>
+  				</tr>
+  				<tr>
+    			<td>5<br>1<br>2<br>3<br>4<br>5</td><td>1<br>2<br>4<br>5<br>6</td>
+  				</tr>
+				</table>
+				<br>
+    	  		<ul id = "sortable-8" style="
+  background-image: linear-gradient(to bottom,#3399ff , #3399ff  50%, #5050f0);padding: 20px;list-style-type:none;border-radius: 8px;">
+  				<li id = "axpSy" class = "default" style="background: #cce5ff;margin: 3px;height: 60px;font-size: 20px;border-radius: 8px;"><font face="Times new roman" style="margin-left: 10px;">set_bits = __builtin_popcount(i);<br>&nbsp;&nbsp;unset_bits = (int) log2(i) + 1 - set_bits;</font></li>
+  				<li id = "axpSY" class = "default" style="background: #cce5ff;margin: 3px;height: 40px;font-size: 20px;border-radius: 8px;"><font face="Times new roman" style="margin-left: 10px;">while(q--) {</font></li>
+  				<li id = "axPsy" class = "default" style="background: #cce5ff;margin: 3px;height: 60px;font-size: 20px;border-radius: 8px;"><font face="Times new roman" style="margin-left: 10px;"> if(unset_bits == 0) <br>&nbsp;&nbsp;&nbsp;continue;</font></li>
+  				<li id = "axPsY" class = "default" style="background: #cce5ff;margin: 3px;height: 40px;font-size: 20px;border-radius: 8px;"><font face="Times new roman" style="margin-left: 10px;"> } //End of for loop</font></li>
+  				<li id = "axPSy" class = "default" style="background: #cce5ff;margin: 3px;height: 40px;font-size: 20px;border-radius: 8px;"><font face="Times new roman" style="margin-left: 10px;"> cout<< ans[k - 1]<< endl;</font></li>
+  				<li id = "axPSY" class = "default" style="background: #cce5ff;margin: 3px;height: 40px;font-size: 20px;border-radius: 8px;"><font face="Times new roman" style="margin-left: 10px;">int main() {</font></li>
+  				<li id = "aXpsy" class = "default" style="background: #cce5ff;margin: 3px;height: 40px;font-size: 20px;border-radius: 8px;"><font face="Times new roman" style="margin-left: 10px;">} //End of main function</font></li>
+         		<li id = "aXpsY" class = "default" style="background: #cce5ff;margin: 3px;height: 40px;font-size: 20px;border-radius: 8px;"><font face="Times new roman" style="margin-left: 10px;">return 0;</font></li>
+  				<li id = "aXpSy" class = "default" style="background: #cce5ff;margin: 3px;height: 40px;font-size: 20px;border-radius: 8px;"><font face="Times new roman" style="margin-left: 10px;"> #include &#8826 bits/stdc++.h &#8827</font></li>
+  				<li id = "aXpSY" class = "default" style="background: #cce5ff;margin: 3px;height: 40px;font-size: 20px;border-radius: 8px;"><font face="Times new roman" style="margin-left: 10px;">cin>>k;</font></li>
+  				<li id = "aXPsy" class = "default" style="background: #cce5ff;margin: 3px;height: 85px;font-size: 20px;border-radius: 8px;"><font face="Times new roman" style="margin-left: 10px;">int q,k,set_bits,unset_bits;<br>&nbsp;&nbsp;vector< int > ans = {1};<br>&nbsp;&nbsp;cin>>q;</font></li>
+  				<li id = "aXPsY" class = "default" style="background: #cce5ff;margin: 3px;height: 40px;font-size: 20px;border-radius: 8px;"><font face="Times new roman" style="margin-left: 10px;">} //End of while loop</font></li>
+  				<li id = "aXPSy" class = "default" style="background: #cce5ff;margin: 3px;height: 40px;font-size: 20px;border-radius: 8px;"><font face="Times new roman" style="margin-left: 10px;"> for(int i = 2; ans.size() < 627509; i++) {</font></li>
+  				<li id = "aXPSY" class = "default" style="background: #cce5ff;margin: 3px;height: 60px;font-size: 20px;border-radius: 8px;"><font face="Times new roman" style="margin-left: 10px;">if(__gcd(set_bits, unset_bits) == 1)<br>&nbsp;&nbsp;&nbsp;ans.push_back(i);</font></li>
+  				<li id = "Axpsy" class = "default" style="background: #cce5ff;margin: 3px;height: 40px;font-size: 20px;border-radius: 8px;"><font face="Times new roman" style="margin-left: 10px;">using namespace std;</font></li>
+				</ul>
+				<p id="demo8"></p>
+				<button type='button' class="btn btn-danger" onclick='pri8()'>Submit</button><br><br><br><br>
+   		 	</div>
+  		</div>
+	</div>
+</body>
+</html>
+
